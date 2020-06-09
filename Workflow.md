@@ -1,5 +1,5 @@
 
-# Mr. Bradley's Git Workflow:
+# Basic Collaboration Git Workflow:
 
 1. `git pull`
 
