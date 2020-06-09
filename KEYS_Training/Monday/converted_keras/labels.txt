@@ -1,0 +1,2 @@
+0 Street Light
+1 Stop Sign
