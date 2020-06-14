@@ -1,0 +1,155 @@
+% Sample Dissertation, Thesis, or Document %
+%            for use with the              %
+%  University of Arizona Thesis Class,     %
+%               uathesis.cls               %
+%------------------------------------------%
+
+% We'll use the uathesis document class (duh).  The uncommented line
+% below will produce a Dissertation, the others would produce a Thesis
+% or a Document.  There are other options available to you like turning
+% on the copyright statement and replacing the year on the title page
+% with a "generated on" stamp (handy for early drafts).  To find out
+% what the available options are, take a look into the uathesis.cls
+% file and look for the \DeclareOption commands near the top of that
+% file.
+% There are five copyright options.  Copyright, no copyright, and three
+% different Creative Commons licences.  Use the one you want (If you go
+% Creative Commons, I (DM) think the CC-BY-ND makes the most sense)  See
+% uathesis.cls for the reason why the non-commercial licenses are not
+% included.
+%\documentclass[dissertation]{uathesis}
+\documentclass[dissertation,copyright]{uathesis}
+%\documentclass[dissertation,CC-BY]{uathesis}
+%\documentclass[dissertation,CC-BY-SA]{uathesis}
+%\documentclass[dissertation,CC-BY-ND]{uathesis}
+%\documentclass[dissertation,generatedon]{uathesis}
+%\documentclass[thesis]{uathesis}
+%\documentclass[document]{uathesis}
+
+% Package Usage
+% These are the packages that we need
+%\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage[left=1.5in, right=1.5in, top=1in, bottom=1in]{geometry}
+\usepackage[ruled,boxed,noend]{algorithm2e}
+\usepackage[table]{xcolor}
+\usepackage[graphicx]{realboxes}
+\usepackage{adjustbox}
+\usepackage{rotating}
+%\usepackage{graphicx}{realboxes}
+\usepackage{cite}
+\usepackage{bbm}			% natbib is available on most systems, and is
+					% terribly handy.
+					% If you want to use a different Bibliography package, 
+					% you should be able to, just change this
+					% and the \bibliographystyle command below.  Be warned
+					% that you may need to do a little hacking to get
+					% the REFERENCES item to show up in your TOC.
+
+% Compatibility with the AASTEX package 
+% of the American Astronomical Society.
+%\usepackage{deluxetable}		% Allows use of AASTEX deluxe tables
+%\usepackage{aastex_hack}		% Allows other AASTEX functionality.
+
+% These are other packages that you might find useful.
+% For controlling the fonts, see
+% http://www.math.uiuc.edu/~hartke/computer/latex/survey/survey.html
+% The following is a nice font set:
+%\usepackage{mathtime}			% Times for letters; Belleek math.
+%
+%\usepackage{amsmath}			% AMS Math (advanced math typesetti`ng)
+%\usepackage{lscape}			% Used for making fitting large tables in by putting them landscape
+\usepackage{refs}			
+%
+% If you are using hyper-ref (recommended), this command must go after all 
+% other package inclusions (from the hyperref package documentation).
+% The purpose of hyperref is to make the PDF created extensively
+% cross-referenced.
+\usepackage[bookmarks,colorlinks=true,urlcolor=black,linkcolor=black,citecolor=black]{hyperref}
+
+
+% Set up some values.
+\completetitle{Developing a highly parallelized TCR synthesis algorithm on GPGPU and FPGA for accelerating the study of immune systems}
+\fullname{Elnaz Tavakoli Yazdi} % Grad college wants your full name here.
+\degreename{Master of Science}	% Title of your degree.
+\usepackage{pdfpages} 
+
+\begin{document}
+
+% Set up the title page
+\maketitlepage
+{DEPARTMENT OF ELECTRICAL AND COMPUTER ENGINEERING}	% Title of your department.
+{2018}							
+ \includepdf[page={1}]{Elnaz_Thesis_Approval} 
+
+% Insert the approval form.  Note that for electronic submission
+% of your Ph. D. dissertation, you must bring *two* copies of the
+% approval page to your final defense.  These must be signed by
+% the committee.  Make two photocopies: one for Pam and the other
+% for your records.  Then, bring the two signed originals to the
+% graduate college when you submit the final version of the
+% dissertation to the University of Arizona.
+%\approval
+%{14 November 2018}		% Defense Date	
+%{Arnold Abrams}		% Dissertation Director
+%{Billy Boy}		% 1st committee member
+%{Carl Crow}		% 2nd committee member
+%{Donna Dood}		    % 3rd committee member
+%{Edgar Elm} % 4th committee member (leave empty if None)
+%{} % 5th committee member (leave empty if None)
+
+% Include the ``Statement by Author'' for Dissertations
+%\statementbyauthor
+% If this is a Thesis, use the following form, with your thesis director's
+% name and title in the square brackets like so (you should also omit the 
+% approval form insertion above):
+%\statementbyauthor[Jane M. Doe\\Professor of Chemistry]
+
+% Include the ``Acknowledgements''
+\incacknowledgements{acknowledgements}
+
+% Include the ``Dedication''
+\incdedication{dedication}
+
+% Create a ``Table of Contents''
+\tableofcontents
+
+% Create a ``List of Figures''
+\listoffigures
+
+% Create a ``List of Tables''
+\listoftables
+
+% Include the ``Abstract''
+\incabstract{abstract}
+
+The $V(D)J$ recombination process is the primary mechanism for generating a diverse repertoire of T-cell receptors (TCRs) essential to the adaptive immune system for recognizing a wide variety of diseases. The diverse set of TCR are required by the immune system to increase the chance of accurate identification of the foreign invaders, which results in successful recovery from diseases. Furthermore, analysis of the TCR repertoire helps immunologists to understand the functionality of immune system in presence of different diseases and find the correlation between diseases and immune receptors. However, modeling this diverse TCR repertoire is computationally challenging as the total number of TCRs to be generated and processed can exceed $10^{18}$ sequences. This massive scale of data processing poses as the barrier for immunologists to successfully understand the functionality of human immune system. Therefore, reducing the timescale of modeling the TCR repertoire will help immunologists to test their assumptions and solve their fundamental questions. 
+
+
+In this study, we propose FPGA and GPU-based implementation of $V(D)J$ recombination process for accelerating the analysis of TCR repertoire. For the GPU-based implementation, we propose a \emph{bit-wise} implementation of the $V(D)J$ recombination algorithm, which reduces the memory footprint and the execution time by factors of 4 and 2 respectively compared to the current state-of-the-art GPU-based implementation. We devise an encoding procedure to convert the input data set from character based domain to binary domain and pack a sequence of four characters into a single byte for the bit-wise implementation. We also proposed new \emph{indexing} scheme for addressing input data that are not aligned with the byte-addressing. We present a multi-GPU implementation, experimentally identify suitable workload partitioning strategies for both single- and multi-GPU implementations, and finally expose the relationship between workload size and limited scalability offered by the algorithm on a cluster with up to eight GPUs.  We show that the bit-wise implementation reduces the execution time from a time scale of 40.5 hours to 18.9 hours on a single GPU and to 4.3 hours on a 8-GPU configuration. 
+
+For the FPGA-based implementation, we first utilize the N-level parallelization approach that is used for the GPU-based implementation. Simulation results show that this approach does not perform as expected for the FPGA-based implementation of $V(D)J$ recombination process due to the communication overhead between FPGA components. Therefore, we propose the VJ level parallelization approach to reduce the communication among components. We show that the VJ-level architecture reduces the execution time by a factor of 2.34 in comparison with the N-level parallelization approach. 
+
+ %propose two hardware architecture with different parallelization approaches to map the recombination process onto the target FPGA. For the first FPGA-based implementation, we follow the N-level parallelization approach that is used for GPU-based implementation. We show that the N-level parallelization approach does not perform as expected on the FPGA due to heavily communication overheads between FPGA components. Therefore, we propose the VJ level parallelization approach to reduce the communication among parallel components. As a result, the VJ-level architecture reduces the execution time by a factor of 2.34 in comparison with the N-level parallelization approach.
+
+% Include the various chapters
+\include{mainmatter/introduction}
+\include{DNA/DNA}
+\include{GPU-Based-Implementation/GPU-Based-Implementation}
+\include{FPGA-Implementation/FPGA-Implementation}
+\include{Conclusion/Conclusion}
+% Include the various appendices
+%\appendix
+%\include{appendix_A}
+
+% Switch the spacing to single-spaced for the references
+\renewcommand{\baselinestretch}{1}		% changing the value
+\small\normalsize										% switch size to make the value take
+
+% Create the References list
+\addcontentsline{toc}{chapter}{References}
+
+\bibliographystyle{IEEEtran} %uabibnat
+\bibliography{bibliography}
+
+\end{document}
