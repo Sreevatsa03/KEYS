@@ -1,0 +1,29 @@
+#!/bin/bash
+### script to run an mpi job using 12-core or less (using only one 12-core node)
+### Set the job name
+#PBS -N Original
+### Specify the PI group for this job
+#PBS -W group_list=akoglu
+### Request email when job begins and ends - commented out in this case
+### PBS -m bea
+### Specify email address to use for notification - commented out in this case
+# PBS -M tavakoliyazdi@email.arizona.edu
+### Set the queue for this job as windfall
+#PBS -q windfall
+### Set the number of nodes, cores and memory that will be used for this job
+#PBS -l select=1:ncpus=1:mem=168gb:pcmem=6gb:ngpus=1
+### Specify "wallclock time" required for this job, hhh:mm:ss
+#PBS -l walltime=100:00:00
+### Specify total cpu time required for this job, hhh:mm:ss
+### total cputime = walltime * ncpus
+#PBS -l cput=100:00:0
+### Load required modules/libraries if needed (openmpi example)
+### Use "module avail" command to list all available modules
+module load cuda80/toolkit/8.0.61
+module load cuda80/profiler/8.0.61
+### set directory for job execution
+cd ~tavakoliyazdi/Baseline_TNT/TNT_DB1_P4_Release 
+### run your executable program with begin and end date and time output
+date
+./Original output > OriginalOutput_P100_N0-10.txt
+date
