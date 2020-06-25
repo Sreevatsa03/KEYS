@@ -194,8 +194,10 @@ int main(int argc, char** argv)
 	//cutilSafeCall(cudaMemcpy(d_InVivo_cp64,  h_InVivo_cp64,  InVivo_memSize64,  cudaMemcpyHostToDevice) );
 	cudaMemcpy(d_InVivo_cp64,  h_InVivo_cp64,  InVivo_memSize64,  cudaMemcpyHostToDevice) ;
 	printf("\nInVivo64 Memsize = %d\n\n", InVivo_memSize64);
+        fflush(stdout);
 
 	printf("Largest number of VJ pairs %d\n", VJ_Largest);
+        fflush(stdout);
 	//getting ready to allocate memory for results on host and the GPU
 	unsigned int numCombN = (unsigned int)pow(4.0, N); //number of unique n combinations, also equal to total number of threads. Assume n 12 is largest
 
@@ -211,6 +213,7 @@ int main(int argc, char** argv)
 		result_Memsize = VJ_Largest * sizeof(unsigned int); //only one thread block, with one result per sequence in this case
 
 	printf("Memory needed on GPU for iteration results: %1.2f MB\n\n", (float) result_Memsize/1048576 );
+        fflush(stdout);
 
 	//allocate memory on the GPU and Host to hold largest set of results. Each thread will store 
 	//it's own results cpu will perform reduction while GPU creates new results
@@ -262,14 +265,48 @@ int main(int argc, char** argv)
 				
 			}
 		printf("Program %1.2f percent complete for n = %d\n", (float)(i+1)/NUM_V_FILES * 100, n_val);
+                fflush(stdout);
 		}
         t4 = clock();
         diff2 = (float)t4 - (float)t3;
-        cout << "Total time for N = " << n_val << " is = " << diff2/CLOCKS_PER_SEC << " seconds\n";
+        cout << "Total time for N = " << n_val << " is = " << diff2/CLOCKS_PER_SEC << " seconds\n" << std::flush;
 	}
     t2 = clock();
     diff1 = (float)t2 - (float)t1;
-    cout << "Total time for program = " << diff1/CLOCKS_PER_SEC << " seconds\n";
+    cout << "Total time for program = " << diff1/CLOCKS_PER_SEC << " seconds\n" << std::flush;
+
+	//Print Chewed back V Sequences
+	int vEnd = 0;
+	int vbaseSize = sizeof(const_d_V_base)/sizeof(const_d_V_base[0]);
+	int vSize = sizeof(const_d_V)/sizeof(const_d_V[0]);
+	cout << "Printed V chewback sequences:" << endl;
+	for (int j=0; j<vbaseSize; j++) {
+		if (j == vbaseSize - 1) {
+			vEnd = vSize;
+		} else {
+			vEnd = const_d_V[const_d_V_base[j+1]];
+		}
+		for (int i=const_d_V_base[j]; i<vEnd; i++){
+			cout << const_d_V[i] << std::flush;
+		}
+		cout << endl;
+	}
+	//Print Chewed back J Sequences
+	int jEnd = 0;
+	int jbaseSize = sizeof(const_d_J_base)/sizeof(const_d_J_base[0]);
+	int jSize = sizeof(const_d_J)/sizeof(const_d_J[0]);
+	cout << "Printed J chewback sequences:" << endl;
+	for (int j=0; j<jbaseSize; j++) {
+		if (j == jbaseSize - 1) {
+			jEnd = jSize;
+		} else {
+			jEnd = const_d_J[const_d_J_base[j+1]];
+		}
+		for (int i=const_d_J_base[j]; i<jEnd; i++){
+			cout << const_d_J[i] << std::flush;
+		}
+		cout << endl;
+	}
 
 	//Free up the GPU memory
     //cutilSafeCallNoSync(cudaFree(d_Results));
