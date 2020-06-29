@@ -3,8 +3,8 @@
 /*================================================================================================*/
 /*=											Definitions											 =*/
 /*================================================================================================*/
-#define N 7							//size of n in characters
-#define N_BEGIN 7					//the smallest n value to test
+#define N 10							//size of n in characters
+#define N_BEGIN 10					//the smallest n value to test
 #define NUM_V_FILES 20				//total number of V files
 #define NUM_J_FILES 12				//total number of J files
 

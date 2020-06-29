@@ -277,33 +277,33 @@ int main(int argc, char** argv)
 
 	//Print Chewed back V Sequences
 	int vEnd = 0;
-	int vbaseSize = sizeof(const_d_V_base)/sizeof(const_d_V_base[0]);
-	int vSize = sizeof(const_d_V)/sizeof(const_d_V[0]);
+	int vbaseSize = sizeof(h_V_base_ip)/sizeof(h_V_base_ip[0]);
+	int vSize = sizeof(h_V_cp)/sizeof(h_V_cp[0]);
 	cout << "Printed V chewback sequences:" << endl;
 	for (int j=0; j<vbaseSize; j++) {
 		if (j == vbaseSize - 1) {
 			vEnd = vSize;
 		} else {
-			vEnd = const_d_V[const_d_V_base[j+1]];
+			vEnd = h_V_cp[h_V_base_ip[j+1]];
 		}
-		for (int i=const_d_V_base[j]; i<vEnd; i++){
-			cout << const_d_V[i] << std::flush;
+		for (int i=h_V_base_ip[j]; i<vEnd; i++){
+			cout << h_V_cp[i] << std::flush;
 		}
 		cout << endl;
 	}
 	//Print Chewed back J Sequences
 	int jEnd = 0;
-	int jbaseSize = sizeof(const_d_J_base)/sizeof(const_d_J_base[0]);
-	int jSize = sizeof(const_d_J)/sizeof(const_d_J[0]);
+	int jbaseSize = sizeof(h_J_base_ip)/sizeof(h_J_base_ip[0]);
+	int jSize = sizeof(h_J_cp)/sizeof(h_J_cp[0]);
 	cout << "Printed J chewback sequences:" << endl;
 	for (int j=0; j<jbaseSize; j++) {
 		if (j == jbaseSize - 1) {
 			jEnd = jSize;
 		} else {
-			jEnd = const_d_J[const_d_J_base[j+1]];
+			jEnd = h_J_cp[h_J_base_ip[j+1]];
 		}
-		for (int i=const_d_J_base[j]; i<jEnd; i++){
-			cout << const_d_J[i] << std::flush;
+		for (int i=h_J_base_ip[j]; i<jEnd; i++){
+			cout << h_J_cp[i] << std::flush;
 		}
 		cout << endl;
 	}

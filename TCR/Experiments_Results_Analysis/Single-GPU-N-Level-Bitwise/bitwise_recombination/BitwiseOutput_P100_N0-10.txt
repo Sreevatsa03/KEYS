@@ -1,0 +1,250 @@
+
+DB1 File Opened Successfully
+Retrieving DB1 Information
+
+Sum h_DB1_cp: 425
+Sum h_V_cp: 913
+Sum h_J_cp: 908
+num InVivo = 101837
+
+Total memory needed for InVivo Sequences with three versions of padding: 1.55 MB
+
+Total time for conversion is = 0.32 seconds
+
+InVivo64 Memsize = 1629392
+
+Largest number of VJ pairs 3249
+Memory needed on GPU for iteration results: 101.53 MB
+
+Program 5.00 percent complete for n = 0
+Program 10.00 percent complete for n = 0
+Program 15.00 percent complete for n = 0
+Program 20.00 percent complete for n = 0
+Program 25.00 percent complete for n = 0
+Program 30.00 percent complete for n = 0
+Program 35.00 percent complete for n = 0
+Program 40.00 percent complete for n = 0
+Program 45.00 percent complete for n = 0
+Program 50.00 percent complete for n = 0
+Program 55.00 percent complete for n = 0
+Program 60.00 percent complete for n = 0
+Program 65.00 percent complete for n = 0
+Program 70.00 percent complete for n = 0
+Program 75.00 percent complete for n = 0
+Program 80.00 percent complete for n = 0
+Program 85.00 percent complete for n = 0
+Program 90.00 percent complete for n = 0
+Program 95.00 percent complete for n = 0
+Program 100.00 percent complete for n = 0
+Total time for N = 0 is = 522.39 seconds
+Program 5.00 percent complete for n = 1
+Program 10.00 percent complete for n = 1
+Program 15.00 percent complete for n = 1
+Program 20.00 percent complete for n = 1
+Program 25.00 percent complete for n = 1
+Program 30.00 percent complete for n = 1
+Program 35.00 percent complete for n = 1
+Program 40.00 percent complete for n = 1
+Program 45.00 percent complete for n = 1
+Program 50.00 percent complete for n = 1
+Program 55.00 percent complete for n = 1
+Program 60.00 percent complete for n = 1
+Program 65.00 percent complete for n = 1
+Program 70.00 percent complete for n = 1
+Program 75.00 percent complete for n = 1
+Program 80.00 percent complete for n = 1
+Program 85.00 percent complete for n = 1
+Program 90.00 percent complete for n = 1
+Program 95.00 percent complete for n = 1
+Program 100.00 percent complete for n = 1
+Total time for N = 1 is = 561.04 seconds
+Program 5.00 percent complete for n = 2
+Program 10.00 percent complete for n = 2
+Program 15.00 percent complete for n = 2
+Program 20.00 percent complete for n = 2
+Program 25.00 percent complete for n = 2
+Program 30.00 percent complete for n = 2
+Program 35.00 percent complete for n = 2
+Program 40.00 percent complete for n = 2
+Program 45.00 percent complete for n = 2
+Program 50.00 percent complete for n = 2
+Program 55.00 percent complete for n = 2
+Program 60.00 percent complete for n = 2
+Program 65.00 percent complete for n = 2
+Program 70.00 percent complete for n = 2
+Program 75.00 percent complete for n = 2
+Program 80.00 percent complete for n = 2
+Program 85.00 percent complete for n = 2
+Program 90.00 percent complete for n = 2
+Program 95.00 percent complete for n = 2
+Program 100.00 percent complete for n = 2
+Total time for N = 2 is = 608.04 seconds
+Program 5.00 percent complete for n = 3
+Program 10.00 percent complete for n = 3
+Program 15.00 percent complete for n = 3
+Program 20.00 percent complete for n = 3
+Program 25.00 percent complete for n = 3
+Program 30.00 percent complete for n = 3
+Program 35.00 percent complete for n = 3
+Program 40.00 percent complete for n = 3
+Program 45.00 percent complete for n = 3
+Program 50.00 percent complete for n = 3
+Program 55.00 percent complete for n = 3
+Program 60.00 percent complete for n = 3
+Program 65.00 percent complete for n = 3
+Program 70.00 percent complete for n = 3
+Program 75.00 percent complete for n = 3
+Program 80.00 percent complete for n = 3
+Program 85.00 percent complete for n = 3
+Program 90.00 percent complete for n = 3
+Program 95.00 percent complete for n = 3
+Program 100.00 percent complete for n = 3
+Total time for N = 3 is = 653.59 seconds
+Program 5.00 percent complete for n = 4
+Program 10.00 percent complete for n = 4
+Program 15.00 percent complete for n = 4
+Program 20.00 percent complete for n = 4
+Program 25.00 percent complete for n = 4
+Program 30.00 percent complete for n = 4
+Program 35.00 percent complete for n = 4
+Program 40.00 percent complete for n = 4
+Program 45.00 percent complete for n = 4
+Program 50.00 percent complete for n = 4
+Program 55.00 percent complete for n = 4
+Program 60.00 percent complete for n = 4
+Program 65.00 percent complete for n = 4
+Program 70.00 percent complete for n = 4
+Program 75.00 percent complete for n = 4
+Program 80.00 percent complete for n = 4
+Program 85.00 percent complete for n = 4
+Program 90.00 percent complete for n = 4
+Program 95.00 percent complete for n = 4
+Program 100.00 percent complete for n = 4
+Total time for N = 4 is = 701.7 seconds
+Program 5.00 percent complete for n = 5
+Program 10.00 percent complete for n = 5
+Program 15.00 percent complete for n = 5
+Program 20.00 percent complete for n = 5
+Program 25.00 percent complete for n = 5
+Program 30.00 percent complete for n = 5
+Program 35.00 percent complete for n = 5
+Program 40.00 percent complete for n = 5
+Program 45.00 percent complete for n = 5
+Program 50.00 percent complete for n = 5
+Program 55.00 percent complete for n = 5
+Program 60.00 percent complete for n = 5
+Program 65.00 percent complete for n = 5
+Program 70.00 percent complete for n = 5
+Program 75.00 percent complete for n = 5
+Program 80.00 percent complete for n = 5
+Program 85.00 percent complete for n = 5
+Program 90.00 percent complete for n = 5
+Program 95.00 percent complete for n = 5
+Program 100.00 percent complete for n = 5
+Total time for N = 5 is = 750.19 seconds
+Program 5.00 percent complete for n = 6
+Program 10.00 percent complete for n = 6
+Program 15.00 percent complete for n = 6
+Program 20.00 percent complete for n = 6
+Program 25.00 percent complete for n = 6
+Program 30.00 percent complete for n = 6
+Program 35.00 percent complete for n = 6
+Program 40.00 percent complete for n = 6
+Program 45.00 percent complete for n = 6
+Program 50.00 percent complete for n = 6
+Program 55.00 percent complete for n = 6
+Program 60.00 percent complete for n = 6
+Program 65.00 percent complete for n = 6
+Program 70.00 percent complete for n = 6
+Program 75.00 percent complete for n = 6
+Program 80.00 percent complete for n = 6
+Program 85.00 percent complete for n = 6
+Program 90.00 percent complete for n = 6
+Program 95.00 percent complete for n = 6
+Program 100.00 percent complete for n = 6
+Total time for N = 6 is = 815.69 seconds
+Program 5.00 percent complete for n = 7
+Program 10.00 percent complete for n = 7
+Program 15.00 percent complete for n = 7
+Program 20.00 percent complete for n = 7
+Program 25.00 percent complete for n = 7
+Program 30.00 percent complete for n = 7
+Program 35.00 percent complete for n = 7
+Program 40.00 percent complete for n = 7
+Program 45.00 percent complete for n = 7
+Program 50.00 percent complete for n = 7
+Program 55.00 percent complete for n = 7
+Program 60.00 percent complete for n = 7
+Program 65.00 percent complete for n = 7
+Program 70.00 percent complete for n = 7
+Program 75.00 percent complete for n = 7
+Program 80.00 percent complete for n = 7
+Program 85.00 percent complete for n = 7
+Program 90.00 percent complete for n = 7
+Program 95.00 percent complete for n = 7
+Program 100.00 percent complete for n = 7
+Total time for N = 7 is = 966.22 seconds
+Program 5.00 percent complete for n = 8
+Program 10.00 percent complete for n = 8
+Program 15.00 percent complete for n = 8
+Program 20.00 percent complete for n = 8
+Program 25.00 percent complete for n = 8
+Program 30.00 percent complete for n = 8
+Program 35.00 percent complete for n = 8
+Program 40.00 percent complete for n = 8
+Program 45.00 percent complete for n = 8
+Program 50.00 percent complete for n = 8
+Program 55.00 percent complete for n = 8
+Program 60.00 percent complete for n = 8
+Program 65.00 percent complete for n = 8
+Program 70.00 percent complete for n = 8
+Program 75.00 percent complete for n = 8
+Program 80.00 percent complete for n = 8
+Program 85.00 percent complete for n = 8
+Program 90.00 percent complete for n = 8
+Program 95.00 percent complete for n = 8
+Program 100.00 percent complete for n = 8
+Total time for N = 8 is = 2905.92 seconds
+Program 5.00 percent complete for n = 9
+Program 10.00 percent complete for n = 9
+Program 15.00 percent complete for n = 9
+Program 20.00 percent complete for n = 9
+Program 25.00 percent complete for n = 9
+Program 30.00 percent complete for n = 9
+Program 35.00 percent complete for n = 9
+Program 40.00 percent complete for n = 9
+Program 45.00 percent complete for n = 9
+Program 50.00 percent complete for n = 9
+Program 55.00 percent complete for n = 9
+Program 60.00 percent complete for n = 9
+Program 65.00 percent complete for n = 9
+Program 70.00 percent complete for n = 9
+Program 75.00 percent complete for n = 9
+Program 80.00 percent complete for n = 9
+Program 85.00 percent complete for n = 9
+Program 90.00 percent complete for n = 9
+Program 95.00 percent complete for n = 9
+Program 100.00 percent complete for n = 9
+Total time for N = 9 is = 11484 seconds
+Program 5.00 percent complete for n = 10
+Program 10.00 percent complete for n = 10
+Program 15.00 percent complete for n = 10
+Program 20.00 percent complete for n = 10
+Program 25.00 percent complete for n = 10
+Program 30.00 percent complete for n = 10
+Program 35.00 percent complete for n = 10
+Program 40.00 percent complete for n = 10
+Program 45.00 percent complete for n = 10
+Program 50.00 percent complete for n = 10
+Program 55.00 percent complete for n = 10
+Program 60.00 percent complete for n = 10
+Program 65.00 percent complete for n = 10
+Program 70.00 percent complete for n = 10
+Program 75.00 percent complete for n = 10
+Program 80.00 percent complete for n = 10
+Program 85.00 percent complete for n = 10
+Program 90.00 percent complete for n = 10
+Program 95.00 percent complete for n = 10
+Program 100.00 percent complete for n = 10
+Total time for N = 10 is = 46457.5 seconds
+Total time for program = 66426.2 seconds

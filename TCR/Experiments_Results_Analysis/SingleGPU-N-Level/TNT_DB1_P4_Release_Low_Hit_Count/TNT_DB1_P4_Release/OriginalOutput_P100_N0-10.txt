@@ -1,0 +1,43 @@
+
+DB1 File Opened Successfully
+Retrieving DB1 Information
+
+num InVivo = 6
+
+Total memory needed for InVivo Sequences 
+with three versions of padding: 0.00 MB
+
+
+InVivo64 Memsize = 384
+
+Largest number of VJ pairs 3249
+Memory needed on GPU for iteration results: 203.06 MB
+
+Program 5.00 percent complete for n = 10
+Program 10.00 percent complete for n = 10
+Program 15.00 percent complete for n = 10
+Program 20.00 percent complete for n = 10
+Program 25.00 percent complete for n = 10
+Program 30.00 percent complete for n = 10
+Program 35.00 percent complete for n = 10
+Program 40.00 percent complete for n = 10
+Program 45.00 percent complete for n = 10
+Program 50.00 percent complete for n = 10
+Program 55.00 percent complete for n = 10
+Program 60.00 percent complete for n = 10
+Program 65.00 percent complete for n = 10
+Program 70.00 percent complete for n = 10
+Program 75.00 percent complete for n = 10
+Program 80.00 percent complete for n = 10
+Program 85.00 percent complete for n = 10
+Program 90.00 percent complete for n = 10
+Program 95.00 percent complete for n = 10
+Program 100.00 percent complete for n = 10
+Total time for N = 10 is = 11575.5 seconds
+Total time for program = 11575.5 seconds
+Printed V chewback sequences:
+AACACCACCTACCTGACCTGCACCTGCAACCTGCAGACCTGCAGTACCTGCAGTGACCTGCAGTG
+ACACCAC
+Printed J chewback sequences:
+CTCTTCCTTCTCTTCGTCTTCAGTCTTCAAGTCTTCGAAGTCTTCAGAAGTCTTCCAGAAGTCTTCACAGAAGTCTTCCACAGA
+TCTTCCT
