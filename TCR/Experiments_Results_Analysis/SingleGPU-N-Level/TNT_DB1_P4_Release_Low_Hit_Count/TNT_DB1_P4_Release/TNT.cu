@@ -275,35 +275,24 @@ int main(int argc, char** argv)
     diff1 = (float)t2 - (float)t1;
     cout << "Total time for program = " << diff1/CLOCKS_PER_SEC << " seconds\n" << std::flush;
 
+	int k;
 	//Print Chewed back V Sequences
-	int vEnd = 0;
-	int vbaseSize = sizeof(h_V_base_ip)/sizeof(h_V_base_ip[0]);
-	int vSize = sizeof(h_V_cp)/sizeof(h_V_cp[0]);
 	cout << "Printed V chewback sequences:" << endl;
-	for (int j=0; j<vbaseSize; j++) {
-		if (j == vbaseSize - 1) {
-			vEnd = vSize;
-		} else {
-			vEnd = h_V_cp[h_V_base_ip[j+1]];
-		}
-		for (int i=h_V_base_ip[j]; i<vEnd; i++){
+	for (int j=h_V_Begin; j<h_V_End; j++) {
+		k = h_V_base_ip[j];
+		for (int i=0; i<h_numUniqueCharV_ip[j]; i++){
 			cout << h_V_cp[i] << std::flush;
+			k++;
 		}
 		cout << endl;
 	}
 	//Print Chewed back J Sequences
-	int jEnd = 0;
-	int jbaseSize = sizeof(h_J_base_ip)/sizeof(h_J_base_ip[0]);
-	int jSize = sizeof(h_J_cp)/sizeof(h_J_cp[0]);
 	cout << "Printed J chewback sequences:" << endl;
-	for (int j=0; j<jbaseSize; j++) {
-		if (j == jbaseSize - 1) {
-			jEnd = jSize;
-		} else {
-			jEnd = h_J_cp[h_J_base_ip[j+1]];
-		}
-		for (int i=h_J_base_ip[j]; i<jEnd; i++){
+	for (int j=h_J_Begin; j<h_J_End; j++) {
+		k = h_J_base_ip[j];
+		for (int i=0; i<h_numUniqueCharJ_ip[j]; i++){
 			cout << h_J_cp[i] << std::flush;
+			k++;
 		}
 		cout << endl;
 	}
