@@ -78,6 +78,8 @@ int main(int argc, char** argv)
 	unsigned int total_threads;			//total number of threads in grid
 	int n_val;							//n value within a loop
 	int h_V_Begin, h_V_End, h_J_Begin, h_J_End; //used for indexing in kernel
+	char h_chewArrV[342][30];
+	char h_chewArrJ[271][30];
 
 	//print error message if n is out of bounds. Function msgs(int) found in TNT_gold.cpp
 	if( N > 12 || N < 0){msgs(0); exit(1);} 
@@ -184,6 +186,9 @@ int main(int argc, char** argv)
 	//number of times a full chewback of DB1 or DB2 occurs
 	cudaMemcpyToSymbol(c_DB_Full_Chew_Occur, &h_D1Occur, sizeof(int));
 
+	cudaMemcpyToSymbol(d_chewArrV, h_chewArrV, sizeof(h_chewArrV));
+	cudaMemcpyToSymbol(d_chewArrJ, h_chewArrJ, sizeof(h_chewArrJ));
+
 
 	//allocate memory on GPU for InVivo Sequences
 	char* d_InVivo_cp64;  
@@ -275,24 +280,41 @@ int main(int argc, char** argv)
     diff1 = (float)t2 - (float)t1;
     cout << "Total time for program = " << diff1/CLOCKS_PER_SEC << " seconds\n" << std::flush;
 
-	int k;
+	//int k;
+	//Print Chewed back V Sequences
+	//cout << "Printed V chewback sequences:" << endl;
+	//for (int j=h_V_Begin; j<h_V_End; j++) {
+	//	k = h_V_base_ip[j];
+	//	for (int i=0; i<h_numUniqueCharV_ip[j]; i++){
+	//		cout << h_V_cp[i] << std::flush;
+	//		k++;
+	//	}
+	//	cout << endl;
+	//}
+	//Print Chewed back J Sequences
+	//cout << "Printed J chewback sequences:" << endl;
+	//for (int j=h_J_Begin; j<h_J_End; j++) {
+	//	k = h_J_base_ip[j];
+	//	for (int i=0; i<h_numUniqueCharJ_ip[j]; i++){
+	//		cout << h_J_cp[i] << std::flush;
+	//		k++;
+	//	}
+	//	cout << endl;
+	//}
+
 	//Print Chewed back V Sequences
 	cout << "Printed V chewback sequences:" << endl;
-	for (int j=h_V_Begin; j<h_V_End; j++) {
-		k = h_V_base_ip[j];
-		for (int i=0; i<h_numUniqueCharV_ip[j]; i++){
-			cout << h_V_cp[i] << std::flush;
-			k++;
+	for (int i = 0; i < 342; i++) {
+		for (int j = 0; j < 30; j++) {
+			cout << h_chewArrV[i][j] << std::flush;
 		}
 		cout << endl;
 	}
 	//Print Chewed back J Sequences
 	cout << "Printed J chewback sequences:" << endl;
-	for (int j=h_J_Begin; j<h_J_End; j++) {
-		k = h_J_base_ip[j];
-		for (int i=0; i<h_numUniqueCharJ_ip[j]; i++){
-			cout << h_J_cp[i] << std::flush;
-			k++;
+	for (int i = 0; i < 271; i++) {
+		for (int j = 0; j < 30; j++) {
+			cout << h_chewArrJ[i][j] << std::flush;
 		}
 		cout << endl;
 	}

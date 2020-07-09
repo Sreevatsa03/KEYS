@@ -38,6 +38,12 @@ __constant__ int c_NUM_V_FILES = 20;
 __constant__ int c_NUM_J_FILES = 12;
 
 
+char d_chewArrV[342][30];
+int chewRowV = 0;
+char d_chewArrJ[271][30];
+int chewRowJ = 0;
+
+
 
 
 /////////////////////////////////////////////////
@@ -378,6 +384,22 @@ TNT_kernel_InVivo64(unsigned int* d_Results, char* d_InVivo_cp64)
 						if(seqMatch == 0) continue;
 
 						sum += c_DB_Full_Chew_Occur; //if we've made it this far, the sequences match.
+
+						//Store Chewed back J Sequences
+						k = const_d_J_base[Jindx];
+						for (int i=0; i<const_d_numUniqueCharJ[Jindx]; i++){
+							d_chewArrJ[chewRowJ][i] = const_d_J[i];
+							k++;
+						}
+						chewRowJ++;
+
+						//Store Chewed back V Sequences
+						k = const_d_V_base[Vindx];
+						for (int i=0; i<const_d_numUniqueCharV[Vindx]; i++){
+							d_chewArrV[chewRowV][i] = const_d_V[i];
+							k++;
+						}
+						chewRowV++;
 
 				} //end iterating through j sequences
 		} //end iterating through v sequences
