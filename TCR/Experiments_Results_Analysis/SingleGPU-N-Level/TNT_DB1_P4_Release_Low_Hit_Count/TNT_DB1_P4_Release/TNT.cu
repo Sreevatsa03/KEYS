@@ -78,8 +78,10 @@ int main(int argc, char** argv)
 	unsigned int total_threads;			//total number of threads in grid
 	int n_val;							//n value within a loop
 	int h_V_Begin, h_V_End, h_J_Begin, h_J_End; //used for indexing in kernel
-	char h_chewArrV[342][30];
-	char h_chewArrJ[271][30];
+	char h_chewArrV[1500][30];
+	char h_chewArrJ[1500][30];
+	size_t size = 45000 * sizeof(char);
+	int h_counterIndex = 0;
 
 	//print error message if n is out of bounds. Function msgs(int) found in TNT_gold.cpp
 	if( N > 12 || N < 0){msgs(0); exit(1);} 
@@ -186,9 +188,16 @@ int main(int argc, char** argv)
 	//number of times a full chewback of DB1 or DB2 occurs
 	cudaMemcpyToSymbol(c_DB_Full_Chew_Occur, &h_D1Occur, sizeof(int));
 
-	cudaMemcpyToSymbol(d_chewArrV, h_chewArrV, sizeof(h_chewArrV));
-	cudaMemcpyToSymbol(d_chewArrJ, h_chewArrJ, sizeof(h_chewArrJ));
-
+	char d_chewArrV[1500][30];
+	char d_chewArrJ[1500][30];
+	//int *d_counterIndex = NULL;
+	cudaMalloc((void **)&d_chewArrV, size);
+	cudaMalloc((void **)&d_chewArrJ, size);
+	//cudaMalloc((void **)&d_counterIndex, sizeof(int));
+	cudaMemset(&d_counterIndex, 0, sizeof(int));
+	cudaMemcpyToSymbol(d_chewArrV, &h_chewArrV, size, cudaMemcpyHostToDevice);
+	cudaMemcpyToSymbol(d_chewArrJ, &h_chewArrJ, size, cudaMemcpyHostToDevice);
+	//cudaMemcpyToSymbol(d_counterIndex, h_counterIndex, sizeof(int), cudaMemcpyHostToDevice);
 
 	//allocate memory on GPU for InVivo Sequences
 	char* d_InVivo_cp64;  
@@ -255,7 +264,7 @@ int main(int argc, char** argv)
 				//----------------------------------//
 				//-          Execute Kernel        -//
 				//----------------------------------//
-				TNT_kernel_InVivo64 <<< grid, thread >>>(d_Results, d_InVivo_cp64);
+				TNT_kernel_InVivo64 <<< grid, thread >>>(d_Results, d_InVivo_cp64, d_chewArrV, d_chewArrJ);
 				cudaDeviceSynchronize();
 
 				//how much memory do we need to transfer for the result. i*NUM_J_FILES + j; this is the current file out of 240 we are on
@@ -264,6 +273,10 @@ int main(int argc, char** argv)
 				//transfer new set of results to host machine
 //				cutilSafeCall(cudaMemcpy(h_Results, d_Results, trans_Size, cudaMemcpyDeviceToHost) );
 				cudaMemcpy(h_Results, d_Results, trans_Size, cudaMemcpyDeviceToHost) ;
+				cudaMemcpyFromSymbol(&h_chewArrV, d_chewArrV, size, 0, cudaMemcpyDeviceToHost);
+				cudaMemcpyFromSymbol(&h_chewArrJ, d_chewArrJ, size, 0, cudaMemcpyDeviceToHost);
+				cudaMemcpyFromSymbol(&h_counterIndex, d_counterIndex, sizeof(int), 0, cudaMemcpyDeviceToHost);
+
 				//reduce data from GPU result array and store on host result array. 
 				hostReduce(n_val, blocks, threads, VJ_Pairs_ip[i * NUM_J_FILES + j], h_Results);
 				print_InVIvo_Results(n_val, i, j, trans_Size/blocks/sizeof(int), h_Results, VJ_Pair_Base_ip[i*NUM_J_FILES + j]);
@@ -304,7 +317,7 @@ int main(int argc, char** argv)
 
 	//Print Chewed back V Sequences
 	cout << "Printed V chewback sequences:" << endl;
-	for (int i = 0; i < 342; i++) {
+	for (int i = 0; i < 1500; i++) {
 		for (int j = 0; j < 30; j++) {
 			cout << h_chewArrV[i][j] << std::flush;
 		}
@@ -312,7 +325,7 @@ int main(int argc, char** argv)
 	}
 	//Print Chewed back J Sequences
 	cout << "Printed J chewback sequences:" << endl;
-	for (int i = 0; i < 271; i++) {
+	for (int i = 0; i < 1500; i++) {
 		for (int j = 0; j < 30; j++) {
 			cout << h_chewArrJ[i][j] << std::flush;
 		}
@@ -324,6 +337,8 @@ int main(int argc, char** argv)
 	//cutilSafeCallNoSync(cudaFree(d_InVivo_cp64));
 	cudaFree(d_Results);
 	cudaFree(d_InVivo_cp64);
+	cudaFree(d_chewArrV);
+	cudaFree(d_chewArrJ);
 
 	//Free up host memory
 	free(h_Results);
@@ -342,6 +357,8 @@ int main(int argc, char** argv)
 	free(h_InVivo_cp64);
 	free(VJ_Pairs_ip);
 	free(VJ_Pair_Base_ip);
+	//free(h_chewArrV);
+	//free(h_chewArrJ);
 
 
 //    shrEXIT(argc, (const char**)argv);
