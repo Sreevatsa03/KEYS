@@ -50,7 +50,7 @@ __device__ int d_counterIndex;
 //kernel for 64 threads or less
 /////////////////////////////////////////////////
 __global__ void
-TNT_kernel_InVivo64(unsigned int* d_Results, char* d_InVivo_cp64, char d_chewArrV[1500][30], char d_chewArrJ[1500][30])	
+TNT_kernel_InVivo64(unsigned int* d_Results, char* d_InVivo_cp64, char* d_chewArrV, char* d_chewArrJ)	
 {
 
 	volatile __shared__ char iterSeq_sm[64]; //the thread block size we will use for this kernel is 64
@@ -388,13 +388,13 @@ TNT_kernel_InVivo64(unsigned int* d_Results, char* d_InVivo_cp64, char d_chewArr
 						//Store Chewed back V Sequences
 						//char * strcpy (d_chewArrV[d_counterIndex], const_d_V); 
 						for (int i=0; i<const_d_numUniqueCharV[Vindx]; i++){
-							d_chewArrV[d_counterIndex][i] = const_d_V[i];
+							d_chewArrV[d_counterIndex * 30 + i] = const_d_V[i];
 						}
 
 						//Store Chewed back J Sequences
 						//char * strcpy (d_chewArrJ[d_counterIndex], const_d_J);
 						for (int i=0; i<const_d_numUniqueCharJ[Jindx]; i++){
-							d_chewArrJ[d_counterIndex][i] = const_d_J[i];
+							d_chewArrJ[d_counterIndex * 30 + i] = const_d_J[i];
 						}
 
 						atomicAdd(&d_counterIndex, 1);  //Add to row iterator
