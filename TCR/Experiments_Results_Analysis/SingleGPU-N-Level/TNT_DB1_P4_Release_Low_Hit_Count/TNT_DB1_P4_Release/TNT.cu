@@ -194,13 +194,17 @@ int main(int argc, char** argv)
 
 	//////////////////////////////////////////////////////////////////////////////////////////////
 	//Dynamically allocate device chewback arrays and row iterator
-	char *d_chewArrV;
-	char *d_chewArrJ;
-	cudaMalloc((void **)&d_chewArrV, size);
-	cudaMalloc((void **)&d_chewArrJ, size);
+	//char *d_chewArrV;
+	//char *d_chewArrJ;
+	//cudaMalloc((void **)&d_chewArrV, size);
+	//cudaMalloc((void **)&d_chewArrJ, size);
 	cudaMemset(&d_counterIndex, 0, sizeof(int));
-	cudaMemcpy(d_chewArrV, h_chewArrV, size, cudaMemcpyHostToDevice);
-	cudaMemcpy(d_chewArrJ, h_chewArrJ, size, cudaMemcpyHostToDevice);
+	//cudaMemcpy(d_chewArrV, h_chewArrV, size, cudaMemcpyHostToDevice);
+	//cudaMemcpy(d_chewArrJ, h_chewArrJ, size, cudaMemcpyHostToDevice);
+	for (int i=0; i< 45000; i++) h_chewArrV[i] = '\0';
+	for (int i=0; i< 45000; i++) h_chewArrJ[i] = '\0';
+	cudaMemcpyToSymbol(d_chewArrV, h_chewArrV, size);
+	cudaMemcpyToSymbol(d_chewArrJ, h_chewArrJ, size);
 	/////////////////////////////////////////////////////////////////////////////////////////////
 
 	//allocate memory on GPU for InVivo Sequences
@@ -268,7 +272,7 @@ int main(int argc, char** argv)
 				//----------------------------------//
 				//-          Execute Kernel        -//
 				//----------------------------------//
-				TNT_kernel_InVivo64 <<< grid, thread >>>(d_Results, d_InVivo_cp64, d_chewArrV, d_chewArrJ);
+				TNT_kernel_InVivo64 <<< grid, thread >>>(d_Results, d_InVivo_cp64);
 				cudaDeviceSynchronize();
 
 				//how much memory do we need to transfer for the result. i*NUM_J_FILES + j; this is the current file out of 240 we are on
@@ -280,8 +284,10 @@ int main(int argc, char** argv)
 				
 				////////////////////////////////////////////////////////////////////////////////////
 				//Transfer memory from device back to host for chewback array
-				cudaMemcpy(h_chewArrV, d_chewArrV, size, cudaMemcpyDeviceToHost);
-				cudaMemcpy(h_chewArrJ, d_chewArrJ, size, cudaMemcpyDeviceToHost);
+				//cudaMemcpy(h_chewArrV, d_chewArrV, size, cudaMemcpyDeviceToHost);
+				//cudaMemcpy(h_chewArrJ, d_chewArrJ, size, cudaMemcpyDeviceToHost);
+				cudaMemcpyFromSymbol(&h_chewArrV, d_chewArrV, size, 0, cudaMemcpyDeviceToHost);
+				cudaMemcpyFromSymbol(&h_chewArrJ, d_chewArrJ, size, 0, cudaMemcpyDeviceToHost);
 				cudaMemcpyFromSymbol(&h_counterIndex, d_counterIndex, sizeof(int), 0, cudaMemcpyDeviceToHost);
 				////////////////////////////////////////////////////////////////////////////////////
 
@@ -323,9 +329,12 @@ int main(int argc, char** argv)
 	//	cout << endl;
 	//}
 
+	cout << "Printing counterIndex:" << h_counterIndex << endl;
+
+	int endRow = h_counterIndex + 1;
 	//Print Chewed back V Sequences
 	cout << "Printed V chewback sequences:" << endl;
-	for (int i = 0; i < 1500; i++) {
+	for (int i = 0; i < endRow; i++) {
 		for (int j = 0; j < 30; j++) {
 			cout << h_chewArrV[i*30+j] << std::flush;
 		}
@@ -333,12 +342,14 @@ int main(int argc, char** argv)
 	}
 	//Print Chewed back J Sequences
 	cout << "Printed J chewback sequences:" << endl;
-	for (int i = 0; i < 1500; i++) {
+	for (int i = 0; i < endRow; i++) {
 		for (int j = 0; j < 30; j++) {
 			cout << h_chewArrJ[i*30+j] << std::flush;
 		}
 		cout << endl;
 	}
+	//cout << h_chewArrJ[0] << endl;
+	//cout << h_chewArrV[0] << endl;
 
 	//Free up the GPU memory
     //cutilSafeCallNoSync(cudaFree(d_Results));

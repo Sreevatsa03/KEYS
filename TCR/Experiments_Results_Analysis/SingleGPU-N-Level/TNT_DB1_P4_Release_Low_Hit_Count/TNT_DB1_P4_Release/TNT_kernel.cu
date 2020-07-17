@@ -37,12 +37,9 @@ __constant__ int const_VJ_Pair_Base[NUM_V_FILES*NUM_J_FILES];
 __constant__ int c_NUM_V_FILES = 20;
 __constant__ int c_NUM_J_FILES = 12;
 
-
-//char d_chewArrV[1500][30];
-//char d_chewArrJ[1500][30];
-//int d_counterIndex = 0;
 __device__ int d_counterIndex;
-
+__device__ char d_chewArrV[45000];
+__device__ char d_chewArrJ[45000];
 
 
 
@@ -50,11 +47,17 @@ __device__ int d_counterIndex;
 //kernel for 64 threads or less
 /////////////////////////////////////////////////
 __global__ void
-TNT_kernel_InVivo64(unsigned int* d_Results, char* d_InVivo_cp64, char* d_chewArrV, char* d_chewArrJ)	
+TNT_kernel_InVivo64(unsigned int* d_Results, char* d_InVivo_cp64)	
 {
 
 	volatile __shared__ char iterSeq_sm[64]; //the thread block size we will use for this kernel is 64
 	volatile __shared__ int result_sm[512];  //the max thread-block size
+
+	////////////////////////
+	// Test Array
+	//d_chewArrV[0] = 'a';
+	//d_chewArrJ[0] = 'a';
+	////////////////////////
 
 	//The four possible bases
 	char base[4] = {'A', 'T', 'G', 'C'};
@@ -338,6 +341,10 @@ TNT_kernel_InVivo64(unsigned int* d_Results, char* d_InVivo_cp64, char* d_chewAr
 			Vmatch = 1;
 				for(int Jindx = c_J_Begin; Jindx < c_J_End && Vmatch; Jindx++){	//go through relevent J sequences
 
+				    //atomic add test
+					//atomicAdd(&d_counterIndex, 1);  //Add to row iterator(test)
+					//__syncthreads();
+
 					length = const_d_numUniqueCharV[Vindx] + const_d_numUniqueCharJ[Jindx] + c_n;
 					n_cnt = c_n;
 
@@ -381,24 +388,13 @@ TNT_kernel_InVivo64(unsigned int* d_Results, char* d_InVivo_cp64, char* d_chewAr
 							k++;												//increment for next character
 						}
 
+						//printf("before");
+
 						if(seqMatch == 0) continue;
 
+						//printf("after");
+
 						sum += c_DB_Full_Chew_Occur; //if we've made it this far, the sequences match.
-
-						//Store Chewed back V Sequences
-						//char * strcpy (d_chewArrV[d_counterIndex], const_d_V); 
-						for (int i=0; i<const_d_numUniqueCharV[Vindx]; i++){
-							d_chewArrV[d_counterIndex * 30 + i] = const_d_V[i];
-						}
-
-						//Store Chewed back J Sequences
-						//char * strcpy (d_chewArrJ[d_counterIndex], const_d_J);
-						for (int i=0; i<const_d_numUniqueCharJ[Jindx]; i++){
-							d_chewArrJ[d_counterIndex * 30 + i] = const_d_J[i];
-						}
-
-						atomicAdd(&d_counterIndex, 1);  //Add to row iterator
-						__syncthreads();
 
 				} //end iterating through j sequences
 		} //end iterating through v sequences
@@ -455,10 +451,28 @@ TNT_kernel_InVivo64(unsigned int* d_Results, char* d_InVivo_cp64, char* d_chewAr
 
 			
 				sum += const_d_numOccurrenceDB1[Dindx]; //if we've made it this far, the sequences match.
-
+	
 				nDn: continue; //if there is no match go to next n variance
 	    	} //end iterating through n sequences
-	} //end iterating through d sequences
+
+			for(int Vindx = c_V_Begin; Vindx < c_V_End; Vindx++){
+				//Store Chewed back V Sequences
+				for (int i=0; i<const_d_numUniqueCharV[Vindx]; i++){
+					d_chewArrV[d_counterIndex * 30 + i] = const_d_V[i];
+				}
+			}
+
+			for(int Jindx = c_J_Begin; Jindx < c_J_End; Jindx++){
+				//Store Chewed back J Sequences
+				for (int i=0; i<const_d_numUniqueCharJ[Jindx]; i++){
+					d_chewArrJ[d_counterIndex * 30 + i] = const_d_J[i];
+				}
+			}
+
+			atomicAdd(&d_counterIndex, 1);  //Add to row iterator
+			__syncthreads();
+
+		} //end iterating through d sequences
 
 
 
