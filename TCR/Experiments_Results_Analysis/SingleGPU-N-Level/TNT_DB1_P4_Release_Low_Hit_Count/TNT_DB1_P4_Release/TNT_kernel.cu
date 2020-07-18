@@ -399,7 +399,26 @@ TNT_kernel_InVivo64(unsigned int* d_Results, char* d_InVivo_cp64)
 				} //end iterating through j sequences
 		} //end iterating through v sequences
 
+		for(int Vindx = c_V_Begin; Vindx < c_V_End; Vindx++){
+			//Store Chewed back V Sequences	
+			k = const_d_V_base[Vindx];
+			for (int i=0; i<const_d_numUniqueCharV[Vindx]; i++){
+				d_chewArrV[d_counterIndex * 30 + k] = const_d_V[k];
+				k++;
+			}
+		}
 
+		for(int Jindx = c_J_Begin; Jindx < c_J_End; Jindx++){
+			//Store Chewed back J Sequences
+			k = const_d_J_base[Jindx];
+			for (int i=0; i<const_d_numUniqueCharJ[Jindx]; i++){
+				d_chewArrJ[d_counterIndex * 30 + k] = const_d_J[k];
+				k++;
+			}
+		}
+
+		atomicAdd(&d_counterIndex, 1);  //Add to row iterator
+		__syncthreads();
 
 		//---------------------------------------------------------------------------------
 		//Compare our InVivo Sequences to nDn combinations with V and J fully chewed
@@ -454,24 +473,6 @@ TNT_kernel_InVivo64(unsigned int* d_Results, char* d_InVivo_cp64)
 	
 				nDn: continue; //if there is no match go to next n variance
 	    	} //end iterating through n sequences
-
-			for(int Vindx = c_V_Begin; Vindx < c_V_End; Vindx++){
-				//Store Chewed back V Sequences
-				for (int i=0; i<const_d_numUniqueCharV[Vindx]; i++){
-					d_chewArrV[d_counterIndex * 30 + i] = const_d_V[i];
-				}
-			}
-
-			for(int Jindx = c_J_Begin; Jindx < c_J_End; Jindx++){
-				//Store Chewed back J Sequences
-				for (int i=0; i<const_d_numUniqueCharJ[Jindx]; i++){
-					d_chewArrJ[d_counterIndex * 30 + i] = const_d_J[i];
-				}
-			}
-
-			atomicAdd(&d_counterIndex, 1);  //Add to row iterator
-			__syncthreads();
-
 		} //end iterating through d sequences
 
 
